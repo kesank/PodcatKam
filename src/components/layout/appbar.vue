@@ -59,9 +59,9 @@
                 style="cursor: pointer"
                 @click="$router.push('/')"
             >
-              <v-icon color="primary" large>mdi-feather</v-icon>
-              Hero
-              <span class="accent--text">UI</span>
+<!--               <v-icon color="primary" large>mdi-feather</v-icon>
+ -->              LES
+              <span class="accent--text">KAMELEONS</span>
             </v-toolbar-title>
           </v-col>
 
@@ -79,21 +79,7 @@
             >
           </v-col>
 
-          <v-col v-if="$vuetify.breakpoint.mdAndUp" class="text-right">
-            <v-btn
-                v-for="(item, i) in btnItems"
-                :key="i"
-                :color="item.color"
-                :href="item.href"
-                :outlined="item.outlined"
-                :target="item.target"
-                :to="item.to"
-                class="ml-3 text-capitalize"
-            >
-              <v-icon left>{{ item.icon }}</v-icon>
-              {{ item.text }}
-            </v-btn>
-          </v-col>
+
         </v-row>
       </v-container>
     </v-app-bar>
@@ -104,36 +90,29 @@
 export default {
   data: () => ({
     drawer: null,
-    btnItems: [
-      {
-        text: "Free Download",
-        href: "https://github.com/AGDholo/giraffe",
-        target: "_black",
-        color: "primary",
-        icon: "mdi-download",
-      },
-    ],
+
     barItems: [
       {
-        title: "Home",
+        title: "Accueil",
         to: "/",
       },
       {
-        title: "Category",
-        to: "/category",
+        title: "Podcasts",
+        to: "/Podcasts",
       },
       {
-        title: "Detail",
-        to: "/detail",
+        title: "Article",
+        to: "/Article",
       },
       {
-        title: "Authors",
-        to: "/authors",
+        title: "Video",
+        to: "/Video",
       },
       {
-        title: "Login",
-        to: "/login",
+        title: "A Propos",
+        to: "/a_propos",
       },
+
     ],
   }),
 };

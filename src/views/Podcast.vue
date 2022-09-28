@@ -5,9 +5,9 @@
         <div>
           <div>
             <div>
-              <h2 class="text-h4 font-weight-bold">ANIMAL</h2>
+              <h2 class="text-h4 font-weight-bold">PODCAST</h2>
 
-              <h4 class="text-h6">Some category description goes here</h4>
+              <h4 class="text-h6">Le Blabla spécial Kaméléon</h4>
             </div>
 
             <v-divider class="my-4"></v-divider>
@@ -67,11 +67,7 @@
         </div>
       </v-col>
 
-      <v-col>
-        <div>
-          <siderbar />
-        </div>
-      </v-col>
+
     </v-row>
   </div>
 </template>

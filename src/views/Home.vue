@@ -1,6 +1,7 @@
 <template>
   <div>
     <div>
+      <!-- Mise en place du caroussel -->
       <v-card to="detail">
         <v-img
             :aspect-ratio="16 / 9"
@@ -31,15 +32,15 @@
         </v-img>
       </v-card>
     </div>
-
+   
     <v-row>
       <v-col cols="12" lg="12" xl="8">
         <div>
           <div class="pt-16">
-            <h2 class="text-h4 font-weight-bold pb-4">Recommended For You</h2>
-
+            <h2 class="text-h4 font-weight-bold pb-4">Dernières publications</h2>
+             <!-- Contenue récent -->
             <v-row>
-              <v-col v-for="i in 6" :key="i" cols="12" lg="4" md="6">
+              <v-col v-for="post in posts" :key="post" cols="12" lg="4" md="6">
                 <v-hover
                     v-slot:default="{ hover }"
                     close-delay="50"
@@ -51,7 +52,7 @@
                         :elevation="hover ? 12 : 0"
                         flat
                         hover
-                        to="/detail"
+                        :to="'Podcast/'+post.id"
                     >
                       <v-img
                           :aspect-ratio="16 / 9"
@@ -62,13 +63,13 @@
                           style="border-radius: 16px"
                       >
                         <v-card-text>
-                          <v-btn color="accent" to="category">TIPS</v-btn>
+                          <v-btn color="accent" to="category">ARTICLE</v-btn>
                         </v-card-text>
                       </v-img>
 
                       <v-card-text>
                         <div class="text-h5 font-weight-bold primary--text">
-                          How to write an awesome blog post in 5 steps
+                          {{post.title}}
                         </div>
 
                         <div class="text-body-1 py-4">
@@ -92,7 +93,7 @@
           </div>
 
           <div class="pt-16">
-            <h2 class="text-h4 font-weight-bold pb-4">Featured</h2>
+            <h2 class="text-h4 font-weight-bold pb-4">Podcast</h2>
 
             <v-row>
               <v-col v-for="i in 3" :key="i" cols="6" lg="4">
@@ -135,7 +136,7 @@
           </div>
 
           <div class="pt-16">
-            <h2 class="text-h4 font-weight-bold">Latest Posts</h2>
+            <h2 class="text-h4 font-weight-bold">6 Derniers articles</h2>
 
             <div>
               <v-row v-for="i in 6" :key="i" class="py-4">
@@ -180,9 +181,9 @@
       </v-col>
 
       <v-col>
-        <div class="pt-16">
+<!--         <div class="pt-16">
           <siderbar/>
-        </div>
+        </div> -->
       </v-col>
     </v-row>
   </div>
@@ -194,5 +195,19 @@ export default {
   components: {
     siderbar: () => import("@/components/details/sidebar"),
   },
+  data: () => ({
+    posts: [
+      { id: 1, title: 'My journey with Vue' },
+      { id: 2, title: 'Blogging with Vue' },
+      { id: 3, title: 'Why Vue is so fun' },
+      { id: 4, title: 'My journey with Vue' },
+      { id: 5, title: 'Blogging with Vue' },
+      { id: 6, title: 'Why Vue is so fun' }
+    ]
+
+  }),
+  methods:{
+
+  }
 };
 </script>

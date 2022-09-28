@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "gitart-scroll-carousel": "^1.2.4",
     "vue": "^2.6.14",
     "vue-router": "^3.2.0",
+    "vue-ssr-carousel": "^1.6.0",
     "vuetify": "^2.6.0"
   },
   "devDependencies": {

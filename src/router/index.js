@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
     {
@@ -11,32 +11,37 @@ const routes = [
         component: Home
     },
     {
-        path: '/category',
-        name: 'Category',
-        component: () => import("@/views/Category.vue"),
+        path: '/Podcasts',
+        name: 'Podcasts',
+        component: () => import("@/views/Podcast.vue"),
     },
     {
-        path: '/detail',
-        name: 'Detail',
-        component: () => import("@/views/Detail.vue"),
+        path: '/Article',
+        name: 'Article',
+        component: () => import("@/views/Article.vue"),
     },
     {
-        path: '/authors',
-        name: 'Authors',
-        component: () => import("@/views/Authors.vue"),
+        path: '/Video',
+        name: 'Video',
+        component: () => import("@/views/Video.vue"),
     },
     {
-        path: '/login',
-        name: 'Login',
-        component: () => import("@/views/Login.vue"),
-    }
-]
+        path: '/a_propos',
+        name: 'APropos',
+        component: () => import("@/views/Apropos.vue"),
+    },
+    {
+        path: '/Podcast/:id',
+        name: 'IdPodcast',
+        component: () => import("@/views/IdPodcast.vue"),
+    },
+];
 
 const router = new VueRouter({
     routes,
     scrollBehavior() {
         document.getElementById('app').scrollIntoView();
     }
-})
+});
 
-export default router
+export default router;
