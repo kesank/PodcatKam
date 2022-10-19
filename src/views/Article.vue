@@ -55,7 +55,7 @@
                               <v-icon dark>mdi-feather</v-icon>
                             </v-avatar>
   
-                            <div class="pl-2">Yan Lee · 22 July 2019</div>
+                            <div class="pl-2"> {{i.date}}</div>
                           </div>
                         </v-card-text>
                       </v-card>
@@ -84,7 +84,7 @@
 
     mounted () {
       axios
-        .get('https://Leskameleons.fr/wp-json/wp/v2/posts')
+        .get('https://leskameleons.fr/wp-json/wp/v2/posts?tags=92')
         .then(response => {this.article = response.data;
                         console.log(this.article)
         })

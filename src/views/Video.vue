@@ -4,12 +4,16 @@
       <v-col cols="12" lg="12" xl="8">
         <div>
           <div>
-            <div class="my-2">
-              <h2 class="text-h4 font-weight-bold">Our Authors</h2>
+            <div>
+              <h2 class="text-h4 font-weight-bold">KamCam</h2>
+
+              <h4 class="text-h6">Le Blabla spécial Kaméléon</h4>
             </div>
 
+            <v-divider class="my-4"></v-divider>
+
             <v-row>
-              <v-col cols="12" md="6" v-for="i in 8" :key="i">
+              <v-col cols="12" md="6" lg="4" v-for="i in article" :key="i">
                 <v-hover
                   v-slot:default="{ hover }"
                   open-delay="50"
@@ -21,48 +25,37 @@
                       :color="hover ? 'white' : 'transparent'"
                       :elevation="hover ? 12 : 0"
                       hover
+                      
+                      @click="goTodetail(i.id)"
                     >
                       <v-img
-                        src="https://cdn.pixabay.com/photo/2021/01/30/20/04/sheltie-5965187_1280.jpg"
+                        :src="i.yoast_head_json.og_image[0].url"
                         :aspect-ratio="16 / 9"
                         gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
-                        height="300px"
+                        height="200px"
                         class="elevation-2"
                         style="border-radius: 16px"
-                      ></v-img>
+                      >
+                        <v-card-text>
+                          <v-btn color="accent">{{i.yoast_head_json.og_type}}</v-btn>
+                        </v-card-text>
+                      </v-img>
 
-                      <v-card-text class="text-center">
-                        <v-avatar color="accent" size="86" class="authors">
-                          <v-icon dark size="64">mdi-feather</v-icon>
-                        </v-avatar>
-
-                        <div
-                          class="text-h5 font-weight-bold primary--text pt-4"
-                        >
-                          Yan Lee
+                      <v-card-text>
+                        <div class="text-h5 font-weight-bold primary--text">
+                          {{i.yoast_head_json.title}}
                         </div>
 
                         <div class="text-body-1 py-4">
-                          Ultrices sagittis orci a scelerisque. Massa placerat
-                          duis ultricies lacus sed turpis tincidunt id.
+                          {{i.yoast_head_json.og_description}}
                         </div>
 
-                        <div>
-                          <v-btn icon>
-                            <v-icon>mdi-facebook</v-icon>
-                          </v-btn>
+                        <div class="d-flex align-center">
+                          <v-avatar color="accent" size="36">
+                            <v-icon dark>mdi-feather</v-icon>
+                          </v-avatar>
 
-                          <v-btn icon>
-                            <v-icon>mdi-twitter</v-icon>
-                          </v-btn>
-
-                          <v-btn icon>
-                            <v-icon>mdi-youtube</v-icon>
-                          </v-btn>
-
-                          <v-btn icon>
-                            <v-icon>mdi-instagram</v-icon>
-                          </v-btn>
+                          <div class="pl-2">Yan Lee · 22 July 2019</div>
                         </div>
                       </v-card-text>
                     </v-card>
@@ -74,28 +67,33 @@
         </div>
       </v-col>
 
-      <v-col>
-        <div>
-          <siderbar />
-        </div>
-      </v-col>
+
     </v-row>
   </div>
 </template>
 
 <script>
+  import axios from 'axios'
 export default {
-  name: "Category",
-  components: {
-    siderbar: () => import("@/components/details/sidebar"),
+  name: "Article",
+  data(){
+      return{
+          article:null,
+      }
   },
+
+  mounted () {
+    axios
+      .get('https://leskameleons.fr/wp-json/wp/v2/posts?tags=94')
+      .then(response => {this.article = response.data;
+                      console.log(this.article)
+      })
+      
+  },
+  methods:{
+    goTodetail(id) {
+      this.$router.push({name:'IdPodcast',params:{id:id}})
+    }
+  }
 };
 </script>
-
-<style lang="scss" scoped>
-.authors {
-  position: relative;
-  top: -50px;
-  margin-bottom: -50px;
-}
-</style>

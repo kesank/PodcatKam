@@ -5,7 +5,7 @@
         <div>
           <div>
             <div>
-              <h2 class="text-h4 font-weight-bold">PODCAST</h2>
+              <h2 class="text-h4 font-weight-bold">Podcast</h2>
 
               <h4 class="text-h6">Le Blabla spécial Kaméléon</h4>
             </div>
@@ -13,7 +13,7 @@
             <v-divider class="my-4"></v-divider>
 
             <v-row>
-              <v-col cols="12" md="6" lg="4" v-for="i in 18" :key="i">
+              <v-col cols="12" md="6" lg="4" v-for="i in article" :key="i">
                 <v-hover
                   v-slot:default="{ hover }"
                   open-delay="50"
@@ -25,10 +25,11 @@
                       :color="hover ? 'white' : 'transparent'"
                       :elevation="hover ? 12 : 0"
                       hover
-                      to="/detail"
+                      
+                      @click="goTodetail(i.id)"
                     >
                       <v-img
-                        src="https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg"
+                        :src="i.yoast_head_json.og_image[0].url"
                         :aspect-ratio="16 / 9"
                         gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
                         height="200px"
@@ -36,18 +37,17 @@
                         style="border-radius: 16px"
                       >
                         <v-card-text>
-                          <v-btn color="accent">ANIMAL</v-btn>
+                          <v-btn color="accent">{{i.yoast_head_json.og_type}}</v-btn>
                         </v-card-text>
                       </v-img>
 
                       <v-card-text>
                         <div class="text-h5 font-weight-bold primary--text">
-                          How to write an awesome blog post in 5 steps
+                          {{i.yoast_head_json.title}}
                         </div>
 
                         <div class="text-body-1 py-4">
-                          Ultrices sagittis orci a scelerisque. Massa placerat
-                          duis ultricies lacus sed turpis
+                          {{i.yoast_head_json.og_description}}
                         </div>
 
                         <div class="d-flex align-center">
@@ -55,7 +55,7 @@
                             <v-icon dark>mdi-feather</v-icon>
                           </v-avatar>
 
-                          <div class="pl-2">Yan Lee · 22 July 2019</div>
+                          <div class="pl-2"> {{i.date}}</div>
                         </div>
                       </v-card-text>
                     </v-card>
@@ -73,15 +73,27 @@
 </template>
 
 <script>
+  import axios from 'axios'
 export default {
-  name: "Category",
-  components: {
-    siderbar: () => import("@/components/details/sidebar"),
+  name: "Article",
+  data(){
+      return{
+          article:null,
+      }
   },
+
   mounted () {
     axios
-      .get('Leskameleons.fr/wp-json/wp/v2/posts')
-      .then(response => (this.info = response))
+      .get('https://leskameleons.fr/wp-json/wp/v2/posts?tags=93')
+      .then(response => {this.article = response.data;
+                      console.log(this.article)
+      })
+      
+  },
+  methods:{
+    goTodetail(id) {
+      this.$router.push({name:'IdPodcast',params:{id:id}})
+    }
   }
 };
 </script>
