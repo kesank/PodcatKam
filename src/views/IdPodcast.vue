@@ -6,7 +6,7 @@
                 <div>
                     <v-card flat color="transparent">
                     <v-img
-                        src="https://cdn.pixabay.com/photo/2020/02/07/20/32/cyprus-4828328_1280.jpg"
+                        :src="article.yoast_head_json.og_image[0].url"
                         :aspect-ratio="16 / 9"
                         gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
                         style="border-radius: 16px"
@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="text-h4 font-weight-bold primary--text pt-4">
-                        <h4>15 Things | have always wondered about birds</h4>
+                        <h4>{{article.title.rendered}}</h4>
                         </div>
 
                         <div class="text-body-1 py-4">
@@ -149,9 +149,33 @@
     </div>
 </template>
 <script>
-    export default {
-      name: "IdPodcast",
+    import axios from 'axios'
 
-    };
+    export default {
+    name: "IdPodcast",
+    data(){
+        return{
+            article:null,
+        }
+    },
+
+    mounted () {
+        console.log(window.location.href);
+        let href=window.location.href
+        href=href.split('/')
+        href=href[href.length-1]
+      axios
+        .get('https://Leskameleons.fr/wp-json/wp/v2/posts/'+href)
+        .then(response => {this.article = response.data;
+            console.log(this.article )
+            
+        })
+        
+    },
+    methods:{
+
+    }
+  };
+    
     </script>
     

@@ -78,5 +78,10 @@ export default {
   components: {
     siderbar: () => import("@/components/details/sidebar"),
   },
+  mounted () {
+    axios
+      .get('Leskameleons.fr/wp-json/wp/v2/posts')
+      .then(response => (this.info = response))
+  }
 };
 </script>
